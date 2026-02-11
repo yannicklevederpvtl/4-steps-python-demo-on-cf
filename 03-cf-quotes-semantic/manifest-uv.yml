@@ -1,0 +1,36 @@
+---
+# Cloud Foundry Manifest: Semantic Quotes with PostgreSQL
+# Using UV Buildpack
+#
+# This stage demonstrates AI services and vector similarity search:
+# 1. AI Embedding Service: Generate vector representations of text
+# 2. Vector Database: Store and search embeddings using pgvector
+# 3. Semantic Search: Find quotes by meaning using cosine similarity
+# 4. Service credentials are available via VCAP_SERVICES environment variable
+#
+# Prerequisites:
+# - PostgreSQL service instance with pgvector (e.g., vector-db)
+#   Create with: cf create-service <postgres-service> <plan> vector-db
+# - AI Embedding service instance (e.g., tanzu-nomic-embed-text)
+#   Create with: cf create-service <embedding-service> <plan> tanzu-nomic-embed-text
+applications:
+  - name: cf-quotes-03-semantic-uv
+    disk-quota: 2G
+    health-check-type: port
+    timeout: 180
+    instances: 1
+    memory: 1G
+    default-route: true
+    stack: cflinuxfs4
+    buildpack: python_buildpack
+      # Start command - runs the FastAPI server with uvicorn
+    command: uv run uvicorn app:app --host 0.0.0.0 --port $PORT
+      # Optional: Override service names if different from defaults
+    # env:  
+      # EMBEDDING_SERVICE_NAME: "tanzu-nomic-embed-text"
+      # VECTOR_DB_SERVICE_NAME: "vector-db"
+      # DEBUG: "true" # Enable verbose debug logging for buildpack
+    # Both services must exist before deployment (create via cf create-service)
+    services:
+      - tanzu-nomic-embed-text  # AI Embedding model service
+      - vector-db               # PostgreSQL with pgvector

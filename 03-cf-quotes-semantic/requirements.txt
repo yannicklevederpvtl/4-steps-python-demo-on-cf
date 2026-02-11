@@ -1,0 +1,20 @@
+# FastAPI and server
+fastapi
+uvicorn
+
+# LangChain dependencies
+langchain-core
+langchain-community
+langchain-postgres
+
+# Cloud Foundry service binding
+cfenv
+
+# Database adapter
+psycopg2-binary
+
+# HTTP client for embedding API calls
+requests
+
+# Form handling for FastAPI
+python-multipart

@@ -1,0 +1,44 @@
+---
+# Cloud Foundry Manifest - Stage 4: Semantic Quotes MCP Server
+# Using UV Buildpack
+#
+# This stage demonstrates MCP (Model Context Protocol) server integration:
+# 1. FastMCP Standalone Server: Complete MCP server framework
+# 2. MCP Protocol: HTTP/SSE transport with JSON-RPC messages
+# 3. MCP Tools: Expose quote functionality as MCP tools
+# 4. Service credentials are available via VCAP_SERVICES environment variable
+#
+# FastMCP with FastAPI integration:
+# - FastMCP integrated with FastAPI for HTTP/SSE transport
+# - REST endpoints (GET /, GET /health) for Cloud Foundry compatibility
+# - MCP protocol endpoints (HTTP/SSE) for MCP clients
+# - Automatic JSON-RPC message parsing and formatting
+# - Automatic tool registration and routing
+#
+# Prerequisites:
+# - PostgreSQL service instance with pgvector (e.g., vector-db)
+#   Create with: cf create-service <postgres-service> <plan> vector-db
+# - AI Embedding service instance (e.g., tanzu-nomic-embed-text)
+#   Create with: cf create-service <embedding-service> <plan> tanzu-nomic-embed-text
+applications:
+  - name: cf-quotes-04-mcp-uv
+    disk-quota: 2G
+    health-check-type: http
+    health-check-http-endpoint: /health
+    timeout: 180
+    instances: 1
+    memory: 1G
+    default-route: true
+    stack: cflinuxfs4
+    buildpack: python_buildpack
+      # Start command - runs the FastAPI server with uvicorn
+    command: uv run python app.py
+    # env:  
+      # Optional: Override service names if different from defaults
+      # EMBEDDING_SERVICE_NAME: "tanzu-nomic-embed-text"
+      # VECTOR_DB_SERVICE_NAME: "vector-db"
+      # DEBUG: "true" # Enable verbose debug logging for buildpack
+    # Both services must exist before deployment (create via cf create-service)
+    services:
+      - tanzu-nomic-embed-text      # default embedding service for the app  
+      - vector-db               # PostgreSQL with pgvector

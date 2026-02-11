@@ -1,0 +1,32 @@
+---
+# Cloud Foundry Manifest: Random Quotes with PostgreSQL
+# Using UV Buildpack
+#
+# This stage demonstrates Cloud Foundry service marketplace and binding:
+# 1. Browse services: cf marketplace
+# 2. Create service: cf create-service <service-name> <plan> <instance-name>
+# 3. Bind service: cf bind-service <app-name> <instance-name>
+#    (or specify in manifest as shown below)
+# 4. Service credentials are available via VCAP_SERVICES environment variable
+#
+# Prerequisites:
+# - PostgreSQL service instance must exist (e.g., vector-db)
+#   Create with: cf create-service <postgres-service> <plan> vector-db
+applications:
+  - name: cf-quotes-02-postgres-uv
+    disk-quota: 2G
+    health-check-type: port
+    timeout: 180
+    instances: 1
+    memory: 1G
+    default-route: true
+    stack: cflinuxfs4
+    buildpack: python_buildpack
+      # Start command - runs the FastAPI server with uvicorn
+    command: uv run uvicorn app:app --host 0.0.0.0 --port $PORT
+      # Optional: Override service name if different from default
+      # VECTOR_DB_SERVICE_NAME: "vector-db"
+    # PostgreSQL service binding required for Stage 2
+    # The service must exist before deployment (create via cf create-service)
+    services:
+      - vector-db  # PostgreSQL service instance name

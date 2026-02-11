@@ -1,0 +1,10 @@
+[project]
+name = "cf-quotes-random-01"
+version = "1.0.0"
+description = "Random Quotes (In-Memory) - Cloud Foundry demo with Python"
+requires-python = ">=3.11"
+dependencies = [
+    # FastAPI and server
+    "fastapi",
+    "uvicorn",
+]

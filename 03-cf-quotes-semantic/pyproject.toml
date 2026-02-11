@@ -1,0 +1,27 @@
+[project]
+name = "cf-quotes-semantic-03"
+version = "1.0.0"
+description = "Semantic Quotes with PostgreSQL - Cloud Foundry demo with Python"
+requires-python = ">=3.11"
+dependencies = [
+    # FastAPI and server
+    "fastapi",
+    "uvicorn",
+    
+    # LangChain dependencies
+    "langchain-core",
+    "langchain-community",
+    "langchain-postgres",
+    
+    # Cloud Foundry service binding
+    "cfenv",
+    
+    # Database adapter
+    "psycopg2",
+    
+    # HTTP client for embedding API calls
+    "requests",
+    
+    # Form handling for FastAPI
+    "python-multipart",
+]

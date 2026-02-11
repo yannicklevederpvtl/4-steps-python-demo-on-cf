@@ -1,0 +1,9 @@
+# FastAPI and server
+fastapi
+uvicorn
+
+# PostgreSQL database
+psycopg2-binary
+
+# Cloud Foundry service binding
+cfenv

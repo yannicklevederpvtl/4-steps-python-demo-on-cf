@@ -1,0 +1,20 @@
+# FastMCP - MCP server framework
+fastmcp<3  # Use stable v2 (v3 is in beta)
+
+# FastAPI - For HTTP endpoints (health check) and FastMCP integration
+fastapi
+uvicorn
+
+# LangChain dependencies
+langchain-core
+langchain-community
+langchain-postgres
+
+# Cloud Foundry service binding
+cfenv
+
+# Database adapter
+psycopg2-binary
+
+# HTTP client for embedding API calls
+requests
