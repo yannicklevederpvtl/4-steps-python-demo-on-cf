@@ -296,3 +296,18 @@ For more information, see the individual README files in each project directory.
 ---
 
 **Total Stages**: 4 | **Complexity**: Progressive (Basic → Advanced)
+
+
+## Resources
+
+Documentation for the platform components used in this workshop:
+
+- **Tanzu Postgres (Postgres tile)**
+  - [Tanzu for Postgres on Tanzu Platform](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-postgres-tanzu-platform/1-2/postgres-tp/install.html) — tile install and configuration
+
+- **Tanzu AI Services**
+  - [AI Services](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/ai-services/10-3/ai/index.html) — overview, embedding models, and integrations
+  - [Binding credentials format (GenAI on TAS for Cloud Foundry)](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/genai-on-tanzu-platform-for-cloud-foundry/10-3/ai-cf/reference-binding-credentials-format.html) — `VCAP_SERVICES` and model capabilities (e.g. embedding)
+
+- **Elastic Application Runtime (TAS)**
+  - [Elastic Application Runtime — concepts overview](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/10-3/eart/concepts-overview.html) — runtime architecture and components
