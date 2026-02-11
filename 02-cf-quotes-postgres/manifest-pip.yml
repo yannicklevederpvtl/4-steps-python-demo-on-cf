@@ -15,10 +15,11 @@
 applications:
   - name: cf-quotes-02-postgres
     disk-quota: 1G
-    health-check-type: port
+    health-check-type: http
+    health-check-http-endpoint: /health
     timeout: 180
     instances: 1
-    memory: 1G
+    memory: 512MB
     default-route: true
     stack: cflinuxfs4
     buildpack: python_buildpack

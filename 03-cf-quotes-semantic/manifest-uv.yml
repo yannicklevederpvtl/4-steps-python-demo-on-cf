@@ -15,11 +15,12 @@
 #   Create with: cf create-service <embedding-service> <plan> tanzu-nomic-embed-text
 applications:
   - name: cf-quotes-03-semantic-uv
-    disk-quota: 2G
-    health-check-type: port
+    disk-quota: 1G
+    health-check-type: http
+    health-check-http-endpoint: /health
     timeout: 180
     instances: 1
-    memory: 1G
+    memory: 512MB
     default-route: true
     stack: cflinuxfs4
     buildpack: python_buildpack
@@ -32,5 +33,5 @@ applications:
       # DEBUG: "true" # Enable verbose debug logging for buildpack
     # Both services must exist before deployment (create via cf create-service)
     services:
-      - tanzu-nomic-embed-text  # AI Embedding model service
+      - tanzu-nomic-embed-text  # default embedding service for the app  
       - vector-db               # PostgreSQL with pgvector
